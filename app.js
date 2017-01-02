@@ -3,13 +3,14 @@ var path = require('path');
 var logger = require('morgan');
 
 var index = require('./routes/index');
+var newRoute = require('./routes/newRoute');
 var app = express();
 
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
-
+app.use('/new', newRoute);
 //Get the URL parameter the user has passed in 
 app.get('/new/:url', function(request, response) {
   var urlParam = request.param('url');
