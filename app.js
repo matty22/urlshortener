@@ -12,7 +12,7 @@ app.use('/', index);
 
 //Get the URL parameter the user has passed in 
 app.get('/:url', function(request, response) {
-  var urlParam = request.param('url');
+  var urlParam = request.params('url');
   console.log("Hello world");
   console.log(urlParam);
 })
