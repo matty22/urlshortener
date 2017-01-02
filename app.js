@@ -11,7 +11,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 //Get the URL parameter the user has passed in 
-app.get('/new/:location', function(request, response) {
+//Because the user is passing a URL, we must encode it
+app.get('/:location', function(request, response) {
   var urlParam = request.params.location;
   response.send(urlParam);
 })
