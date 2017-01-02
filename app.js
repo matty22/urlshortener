@@ -11,9 +11,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 //Get the URL parameter the user has passed in 
-app.get('/new/:url', function(request, response) {
-  var urlParam = request.param('url');
-  console.log(urlParam);
+app.get('/new/:location', function(request, response) {
+  var urlParam = request.params.location;
+  response.send(urlParam);
 })
 
 // catch 404 and forward to error handler
