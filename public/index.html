@@ -19,9 +19,15 @@
           <h1>URL Shortener</h1>
           <div class="panel panel-default">
             <div class="panel-body">
-              <p class="introBlurb">This thing will shorten your URL.
+              <p class="introBlurb">This URL shortener takes a valid URL as a parameter and returns a JSON object with
+                the original URL and the shortened version. The user can then use the shortened URL to access the original
+                page.
               </p>
+              <p>Enter a URL like one of these into your browser URL bar:</p>
             </div>
+            <div class="alert alert-danger">https://matty22urlshortener.herokuapp.com/new/http://www.google.com</div>
+            <p>You should receive a response that looks similar to this:</p>
+            <div class="alert alert-success">{"original_url": "https://www.google.com", "short_url": "https://matty22urlshortener.herokuapp.com/52"}</div>
           </div>
         </div>
         <div class="col-md-2"></div>
