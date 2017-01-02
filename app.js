@@ -18,6 +18,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
+//Get the URL parameter the user has passed in 
+app.get('/new/:url', function(request, response) {
+  var urlParam = request.param('url');
+  console.log(urlParam);
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
