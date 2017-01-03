@@ -7,7 +7,6 @@ var app = express();
 
 
 app.use(logger('dev'));
-app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
