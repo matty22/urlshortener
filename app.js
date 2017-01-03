@@ -15,7 +15,7 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  if (validUrl.isUri(urlParam)) {
+  if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
     response.send(urlParam);
   } else {
     response.send("Not a valid URL");
