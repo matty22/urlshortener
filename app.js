@@ -14,7 +14,8 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location', function(request, response) {
   var urlParam = request.params.location;
-  response.send(urlParam);
+  //response.send(urlParam);
+  response.send(request.baseUrl);
 })
 
 // catch 404 and forward to error handler
