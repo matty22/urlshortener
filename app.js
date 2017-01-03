@@ -13,7 +13,7 @@ app.use('/', index);
 //Get the URL parameter the user has passed in 
 //Because the user is passing a URL, we must encode it
 app.get('/:location', function(request, response) {
-  var urlParam = request.params.location;
+  var urlParam = encodeURI(request.params.location);
   response.send(urlParam);
 })
 
