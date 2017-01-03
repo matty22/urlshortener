@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var validUrl = require('vaild-url');
+//var validUrl = require('vaild-url');
 
 var index = require('./routes/index');
 var app = express();
@@ -15,11 +15,7 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  if (validUrl.isUri(urlParam)) {
-    response.send(urlParam);
-  } else {
-    response.send("Not a valid URL");
-  }
+  response.send(urlParam);
 })
 
 // catch 404 and forward to error handler
