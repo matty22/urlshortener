@@ -27,7 +27,7 @@ app.get('/:location(*)', function(request, response) {
           throw err;
         }
         dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
-          response.send(docs);
+          response.send(docs);f
         });
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);
