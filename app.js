@@ -5,7 +5,7 @@ var validUrl = require('valid-url');
 var dbOps = require('./dbOps');
 var MongoClient = require('mongodb').MongoClient;
 // Database Connection URL
-var dbUrl = 'mongodb://dbuser:dbpass@ds151028.mlab.com:51028/urls';
+var dbUrl = 'mongodb://' + process.env.dbuser + ':' + process.env.dbpass + '@ds151028.mlab.com:51028/urls';
 
 
 var index = require('./routes/index');
