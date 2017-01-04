@@ -1,15 +1,12 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var validUrl = require('valid-url');
 var dbOps = require('./dbOps');
 var MongoClient = require('mongodb').MongoClient;
 // Database Connection URL
-// Add URL here to wherever in mLab my db is located
-// Ask Red Pandas what the environment variable section
-// means here: forum.freecodecamp.com/t/guide-for-using-mongodb-and-deploying-to-heroku/19347
-// var dbUrl = '';
+var dbUrl = 'mongodb://dbuser:dbpass@ds151028.mlab.com:51028/urls';
 
-var validUrl = require('valid-url');
 
 var index = require('./routes/index');
 var app = express();
@@ -28,7 +25,28 @@ app.get('/:location(*)', function(request, response) {
   } else {
     response.send("Not a valid URL");
   }
-})
+
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+
+    dbOps.insertDocument(db, { name: "Hello World" }, "urlColl", function(results) {
+      console.log(result.ops);
+
+      dbOps.findDocument(db, "urlColl", function(docs) {
+        console.log(docs);
+
+        db.dropCollection("urlColl", function(result) {
+          console.log(result);
+          db.close();
+        });
+      });
+    });
+
+  });
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
