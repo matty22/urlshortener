@@ -39,11 +39,11 @@ app.get('/:location(*)', function(request, response) {
         //console.log(docs);
         response.send(docs);
 
-        db.dropCollection("urlColl", function(result) {
-          //console.log(result);
-          response.send(result);
-          db.close();
-        });
+        // db.dropCollection("urlColl", function(result) {
+        //   //console.log(result);
+        //   response.send(result);
+        //   db.close();
+        // });
       });
     });
 
