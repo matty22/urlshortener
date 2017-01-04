@@ -1,6 +1,14 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var dbOps = require('./dbOps');
+var MongoClient = require('mongodb').MongoClient;
+// Database Connection URL
+// Add URL here to wherever in mLab my db is located
+// Ask Red Pandas what the environment variable section
+// means here: forum.freecodecamp.com/t/guide-for-using-mongodb-and-deploying-to-heroku/19347
+// var dbUrl = '';
+
 var validUrl = require('valid-url');
 
 var index = require('./routes/index');
