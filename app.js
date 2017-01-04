@@ -26,7 +26,6 @@ app.get('/:location(*)', function(request, response) {
        if (err) {
           throw err;
         }
-        response.write("Connected successfully to database");
         dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
           response.send(result.ops);
 
