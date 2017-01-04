@@ -5,7 +5,7 @@ var validUrl = require('valid-url');
 var dbOps = require('./dbOps');
 var MongoClient = require('mongodb').MongoClient;
 // Database Connection URL
-var dbUrl = 'mongodb://' + process.env.dbuser + ':' + process.env.dbpass + '@ds151028.mlab.com:51028/urls';
+var dbUrl = process.env.MONGOURL;
 
 
 var index = require('./routes/index');
@@ -26,7 +26,7 @@ app.get('/:location(*)', function(request, response) {
   //   response.send("Not a valid URL");
   // }
 
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(dbUrl, function(err, db) {
     if (err) {
       throw err;
     }
