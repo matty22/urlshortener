@@ -27,3 +27,17 @@ exports.findDocument = function(db, collection, callback) {
     callback(docs);
   });
 };
+
+exports.findOneDocument = function(db, originalUrl, collection, callback) {
+  // Get the document collection
+  var coll = db.collection(collection);
+
+  // Find one document
+  coll.findOne({ originalUrl }).toArray(function(err, docs) {
+    if (err) {
+      throw err;
+    }
+
+    callback(docs);
+  });
+}

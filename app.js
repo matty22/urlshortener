@@ -26,26 +26,18 @@ app.get('/:location(*)', function(request, response) {
        if (err) {
           throw err;
         }
-        dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
-          response.send(results.ops);
-
-          dbOps.findDocument(db, "urlColl", function(docs) {
-            //response.send(docs);
-
-            // db.dropCollection("urlColl", function(result) {
-            //   //console.log(result);
-            //   response.send(result);
-            //   db.close();
-            // });
-          });
+        dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
+          response.send(docs);
         });
+        // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
+        //   response.send(results.ops);
+
+          
+        // });
     });
   } else {
     response.send("Not a valid URL");
   }
-
-
-
 });
 
 // catch 404 and forward to error handler
