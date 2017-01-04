@@ -26,9 +26,9 @@ app.get('/:location(*)', function(request, response) {
        if (err) {
           throw err;
         }
+        console.log("***** Successfully connected to Mongo Database  *****");
         dbOps.findDocument(db, "urlcoll", function(docs) {
-          var docArray = docs;
-          response.send(docArray);
+          console.log(docs);
         });
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);
