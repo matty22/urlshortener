@@ -27,9 +27,13 @@ app.get('/:location(*)', function(request, response) {
           throw err;
         }
         console.log("***** Successfully connected to Mongo Database  *****");
-        dbOps.findDocument(db, "urlColl", function(docs) {
+        // This works DO NOT DELETE
+        // dbOps.findDocument(db, "urlColl", function(docs) {
+        //   console.log(docs);
+        // });
+        dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
           console.log(docs);
-        });
+        })
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);
 
