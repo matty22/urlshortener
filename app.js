@@ -20,11 +20,11 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
-    response.send(urlParam);
-  } else {
-    response.send("Not a valid URL");
-  }
+  // if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
+  //   response.send(urlParam);
+  // } else {
+  //   response.send("Not a valid URL");
+  // }
 
   MongoClient.connect(url, function(err, db) {
     if (err) {
@@ -32,13 +32,16 @@ app.get('/:location(*)', function(request, response) {
     }
 
     dbOps.insertDocument(db, { name: "Hello World" }, "urlColl", function(results) {
-      console.log(result.ops);
+      //console.log(result.ops);
+      response.send(result.ops);
 
       dbOps.findDocument(db, "urlColl", function(docs) {
-        console.log(docs);
+        //console.log(docs);
+        response.send(docs);
 
         db.dropCollection("urlColl", function(result) {
-          console.log(result);
+          //console.log(result);
+          response.send(result);
           db.close();
         });
       });
