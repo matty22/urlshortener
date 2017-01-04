@@ -27,12 +27,16 @@ app.get('/:location(*)', function(request, response) {
           throw err;
         }
         console.log("***** Successfully connected to Mongo Database  *****");
-        // This works DO NOT DELETE
+        // This returns all documents in the database
         // dbOps.findDocument(db, "urlColl", function(docs) {
         //   console.log(docs);
         // });
+
+        // This returns the first match in the dB for the urlParam query
         dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
-          console.log(docs);
+          // Write a conditional here that says if the url exists, response.send(doc)
+          // Else do an insertDocument
+          // START HERE!
         })
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);
