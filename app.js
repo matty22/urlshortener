@@ -27,7 +27,7 @@ app.get('/:location(*)', function(request, response) {
           throw err;
         }
         dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
-          response.send(result.ops);
+          response.send(results.ops);
 
           dbOps.findDocument(db, "urlColl", function(docs) {
             //response.send(docs);
