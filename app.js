@@ -26,9 +26,9 @@ app.get('/:location(*)', function(request, response) {
        if (err) {
           throw err;
         }
-        dbOps.find({ "original_url": urlParam }).toArray(function(err, docs) {
-          response.send("Found this document that matches your search: " + docs);
-          callback(docs);
+        dbOps.findDocument(db, "urlcoll", function(docs) {
+          var docArray = docs;
+          response.send(docArray);
         });
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);
