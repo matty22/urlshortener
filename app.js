@@ -21,16 +21,17 @@ app.use('/', index);
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
   if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
+    
     MongoClient.connect(dbUrl, function(err, db) {
        if (err) {
           throw err;
         }
-
+        response.write("Connected successfully to database");
         dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
           response.send(result.ops);
 
           dbOps.findDocument(db, "urlColl", function(docs) {
-            response.send(docs);
+            //response.send(docs);
 
             // db.dropCollection("urlColl", function(result) {
             //   //console.log(result);
