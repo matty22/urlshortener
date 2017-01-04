@@ -26,8 +26,9 @@ app.get('/:location(*)', function(request, response) {
        if (err) {
           throw err;
         }
-        dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
-          response.send(docs);f
+        dbOps.find({ "original_url": urlParam }).toArray(function(err, docs) {
+          response.send("Found this document that matches your search: " + docs);
+          callback(docs);
         });
         // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
         //   response.send(results.ops);

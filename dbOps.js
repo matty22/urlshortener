@@ -33,7 +33,7 @@ exports.findOneDocument = function(db, originalUrl, collection, callback) {
   var coll = db.collection(collection);
 
   // Find one document
-  coll.findOne({ originalUrl }).toArray(function(err, docs) {
+  coll.find({ "original_url": originalUrl }).toArray(function(err, docs) {
     if (err) {
       throw err;
     }
