@@ -31,7 +31,7 @@ app.get('/:location(*)', function(request, response) {
         dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
             
             // If the search finds a match, we don't want to add it again
-            if (docs.length > 0 && !inNaN(Number(urlParam))) {
+            if (docs.length > 0 && !isNaN(Number(urlParam))) {
               response.send("This shortened url exists and I found it using a number parameter");
             } else if (docs.length === 0 && validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
               // If the search does not find a match and the parameter is a valid URL, we want to add it to the database
