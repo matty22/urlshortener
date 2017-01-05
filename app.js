@@ -39,9 +39,7 @@ app.get('/:location(*)', function(request, response) {
                 response.send(results.ops);
               });
               dbId = dbId + 1;
-            } else if (docs.length === 0)
-          }
-
+            } 
         });
     });
 });
