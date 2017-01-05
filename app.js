@@ -34,8 +34,8 @@ app.get('/:location(*)', function(request, response) {
             // START HERE - Figure out a way to check if the passes param is a number
             // that matches a document ID in the dB
             if (docs.length > 0) {
-              response.send("This shortened url exists and I found it using a number parameter");
-            } else if (docs.length === 0 && validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
+              response.send("This shortened url exists in the database with id " + docs[0]._id);
+            } else if (docs.length == 0 && validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
               // If the search does not find a match and the parameter is a valid URL, we want to add it to the database
               dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
                 response.send(results.ops);
