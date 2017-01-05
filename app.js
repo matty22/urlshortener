@@ -34,6 +34,7 @@ app.get('/:location(*)', function(request, response) {
             //If it exists, redirect to the original_url
             if (docs.length > 0) {
               response.writeHead(301, { Location: docs[0].original_url });
+              response.end();
             } else {
               // Else inform user that their shortened url does not exist
               response.send("That shortened url does not exist");
