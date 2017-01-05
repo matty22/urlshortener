@@ -46,7 +46,7 @@ app.get('/:location(*)', function(request, response) {
           dbOps.findOneByUrl(db, urlParam, "urlColl", function(docs) {
             // If it already exists, inform user so, and provide the id of that shortened url.
             if (docs.length > 0) {
-              response.send("This shortened url already exists. Use the url" + <p>Hello, this is a p tag</p> + "http://matty22urlshortener.herokuapp.com/" + docs[0]._id + " to redirect to that location.");
+              response.send("This shortened url already exists. Use the url http://matty22urlshortener.herokuapp.com/" + docs[0]._id + " to redirect to that location.");
             } else {
               // Else add that url to the database as a new record
               dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
