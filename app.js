@@ -40,8 +40,8 @@ app.get('/:location(*)', function(request, response) {
           if (docs.length > 0) {
             response.send("This shortened url already exists with id " + docs[0]._id);
           } else {
-            db += 1;
-            dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + db }, "urlColl", function(results) {
+            dbId += 1;
+            dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId }, "urlColl", function(results) {
               response.send(results.ops);
             });
           }
