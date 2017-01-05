@@ -32,7 +32,7 @@ exports.findOneByUrl = function(db, passedParam, collection, callback) {
   // Get the document collection
   var coll = db.collection(collection);
 
-  // Find one document
+  // Find one document by url
   coll.find({ "original_url": passedParam }).toArray(function(err, docs) {
     if (err) {
       throw err;
@@ -46,7 +46,7 @@ exports.findOneById = function(db, passedParam, collection, callback) {
   // Get the document collection
   var coll = db.collection(collection);
 
-  // Find one document
+  // Find one document by id
   coll.find({ "_id": passedParam }).toArray(function(err, docs) {
     if (err) {
       throw err;

@@ -10,7 +10,7 @@ var dbUrl = process.env.MONGOURL;
 
 var index = require('./routes/index');
 var app = express();
-var dbId = 0;
+var dbId = 1;
 
 
 app.use(logger('dev'));
@@ -31,8 +31,8 @@ app.get('/:location(*)', function(request, response) {
           // Search dB for any record that matches the id param
           // If it exists, response.send that object
           // Once that works, work on the redirect to the original url
-          console.log("Param is " + urlParam);
-          dbOps.findOneById(db, urlParam, "urlColl", function(docs) {
+          var urlParamNumber = Number(urlParam);
+          dbOps.findOneById(db, urlParamNumber, "urlColl", function(docs) {
             console.log(docs);
             if (docs.length > 0) {
               response.send(docs[0]);
