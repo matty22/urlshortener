@@ -51,7 +51,7 @@ app.get('/:location(*)', function(request, response) {
               // Else add that url to the database as a new record
               dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
                  dbId = dbId + 1;
-                 response.send(results[0].ops;
+                 response.send(results[0].ops);
               });
             }
           });
