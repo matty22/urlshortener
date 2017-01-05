@@ -47,7 +47,10 @@ app.get('/:location(*)', function(request, response) {
             if (docs.length > 0) {
               response.send("This shortened url exists " + docs[0]);
             } else {
-              response.send("This shortened url does not exist, let's insert it");
+              dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
+                 dbId = dbId + 1;
+                 response.send(results.ops);
+              });
             }
           });
         } else {
