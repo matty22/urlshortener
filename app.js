@@ -37,14 +37,11 @@ app.get('/:location(*)', function(request, response) {
           if (docs.length > 0) {
             response.send("This shortened url already exists with id ");
           } else {
-            response.send("This shortened url does not exist yet");
+            dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
+              response.send(results.ops);
+            });
           }
-        })
-        // dbOps.insertDocument(db, { original_url: urlParam }, "urlColl", function(results) {
-        //   response.send(results.ops);
-
-          
-        // });
+        });
     });
   } else {
     response.send("Not a valid URL");
