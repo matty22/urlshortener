@@ -20,7 +20,7 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  var dbId = 0;
+  var dbId = 1;
   if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
     
     MongoClient.connect(dbUrl, function(err, db) {
@@ -40,9 +40,9 @@ app.get('/:location(*)', function(request, response) {
           if (docs.length > 0) {
             response.send("This shortened url already exists with id " + docs[0]._id);
           } else {
-            dbId += 1;
             dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
               response.send(results.ops);
+              dbId = dbId + 1;
             });
           }
         });
