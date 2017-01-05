@@ -10,6 +10,7 @@ var dbUrl = process.env.MONGOURL;
 
 var index = require('./routes/index');
 var app = express();
+var dbId = 1;
 
 
 app.use(logger('dev'));
@@ -20,7 +21,6 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  var dbId = 1;
   if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
     
     MongoClient.connect(dbUrl, function(err, db) {
