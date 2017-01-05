@@ -21,35 +21,29 @@ app.use('/', index);
 //Because the user is passing a URL, we must encode it
 app.get('/:location(*)', function(request, response) {
   var urlParam = request.params.location;
-  if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
     
     MongoClient.connect(dbUrl, function(err, db) {
        if (err) {
           throw err;
         }
-        console.log("***** Successfully connected to Mongo Database  *****");
-        // This returns all documents in the database
-        // For now, this is not necessary
-        // Delete prior to shipping
-        // dbOps.findDocument(db, "urlColl", function(docs) {
-        //   console.log(docs);
-        // });
 
         // This returns the first match in the dB for the urlParam query
         dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
-          if (docs.length > 0) {
-            response.send("This shortened url already exists with id " + docs[0]._id);
-          } else {
-            dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
-              response.send(results.ops);
-            });
-            dbId = dbId + 1;
+            
+            // If the search finds a match, we don't want to add it again
+            if (docs.length > 0 && typeof urlParam === Number) {
+              response.send("This shortened url exists and I found it using a number parameter");
+            } else if (docs.length === 0 && validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
+              // If the search does not find a match and the parameter is a valid URL, we want to add it to the database
+              dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
+                response.send(results.ops);
+              });
+              dbId = dbId + 1;
+            } else if (docs.length === 0)
           }
+
         });
     });
-  } else {
-    response.send("Not a valid URL");
-  }
 });
 
 // catch 404 and forward to error handler
