@@ -42,8 +42,8 @@ app.get('/:location(*)', function(request, response) {
           } else {
             dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
               response.send(results.ops);
-              dbId = dbId + 1;
             });
+            dbId = dbId + 1;
           }
         });
     });
