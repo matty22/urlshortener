@@ -28,11 +28,30 @@ app.get('/:location(*)', function(request, response) {
         }
 
         if (!isNaN(Number(urlParam))) {
-          console.log("The param is a number");
+          // Search dB for any record that matches the id param
+          // If it exists, response.send that object
+          // Once that works, work on the redirect to the original url
+          dbOps.findOneById(db, urlParam, "urlColl", function(docs) {
+            if (docs.length > 0) {
+              response.send(docs[0]);
+            } else {
+              response.send("That shortened url does not exist");
+            }
+          });
+
         } else if (validUrl.is_http_uri(urlParam) || validUrl.is_https_uri(urlParam)) {
-          console.log("The param is a valid url");
+          // Seach dB for any record that matches the url param
+          // If it exists, reponse.send "This shortened url exists" and return the object
+          // If it does not exist, insert document
+          dbOps.findOneByUrl(db, urlParam, "urlColl", function(docs) {
+            if (docs.length > 0) {
+              response.send("This shortened url exists " + docs[0]);
+            } else {
+              response.send("This shortened url does not exist, let's insert it");
+            }
+          });
         } else {
-          console.log("The param is invalid");
+          response.send("The url parameter is invalid");
         }
 
 
