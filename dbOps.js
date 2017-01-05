@@ -28,12 +28,26 @@ exports.findDocument = function(db, collection, callback) {
   });
 };
 
-exports.findOneDocument = function(db, originalUrl, collection, callback) {
+exports.findOneByUrl = function(db, passedParam, collection, callback) {
   // Get the document collection
   var coll = db.collection(collection);
 
   // Find one document
-  coll.find({ "original_url": originalUrl }).toArray(function(err, docs) {
+  coll.find({ "original_url": passedParam }).toArray(function(err, docs) {
+    if (err) {
+      throw err;
+    }
+
+    callback(docs);
+  });
+}
+
+exports.findOneById = function(db, passedParam, collection, callback) {
+  // Get the document collection
+  var coll = db.collection(collection);
+
+  // Find one document
+  coll.find({ "_id": passedParam }).toArray(function(err, docs) {
     if (err) {
       throw err;
     }
