@@ -34,7 +34,7 @@ app.get('/:location(*)', function(request, response) {
 
         // This returns the first match in the dB for the urlParam query
         dbOps.findOneDocument(db, urlParam, "urlColl", function(docs) {
-          if (docs) {
+          if (docs.length > 0) {
             response.send("This shortened url already exists with id ");
           } else {
             response.send("This shortened url does not exist yet");
