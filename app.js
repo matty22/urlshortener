@@ -40,7 +40,7 @@ app.get('/:location(*)', function(request, response) {
               });
               dbId = dbId + 1;
             } else {
-              console.log("THE URL PARAM IS " + urlParam);
+              console.log("THE URL PARAM IS " + urlParam + "and its type is " + typeof urlParam);
               response.send("This is not a valid URL");
             }
         });
