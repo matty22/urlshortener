@@ -40,12 +40,15 @@ app.get('/:location(*)', function(request, response) {
               dbOps.insertDocument(db, { "original_url": urlParam, "shortened_url": "http://matty22urlshortener.herokuapp.com/" + dbId, "_id": dbId }, "urlColl", function(results) {
                 response.send(results.ops);
               });
-              dbId = dbId + 1;
+              
             } else {
               console.log("THE URL PARAM IS " + urlParam + "and its type is " + typeof urlParam);
               response.send("This is not a valid URL");
             }
         });
+        // This iterator is misplaced again as well. Adding a new document results in duplicate key error
+        // Must be fixed
+        dbId = dbId + 1;
     });
 });
 
