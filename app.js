@@ -39,7 +39,9 @@ app.get('/:location(*)', function(request, response) {
                 response.send(results.ops);
               });
               dbId = dbId + 1;
-            } 
+            } else {
+              response.send("This is not a valid URL");
+            }
         });
     });
 });
